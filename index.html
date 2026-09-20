@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="robots" content="noindex,nofollow"/>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <title>家庭時間表</title>
 <style>
 
@@ -121,6 +122,7 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
   color: #ecfdf5; font-weight: 700; font-size: 1rem; cursor: pointer;
 }
 .gate-card .err { color: #9a3412; font-size: .85rem; min-height: 1.2em; margin-bottom: 8px; }
+.gate-card .ver { margin-top: 12px; font-size: .75rem; color: #9ca3af; text-align: center; }
 #app { display: none; }
 #app.show { display: block; }
 </style>
@@ -131,8 +133,9 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
     <h1>家庭時間表</h1>
     <p>輸入密碼（Jacky / Maggie）</p>
     <div class="err" id="err"></div>
-    <input id="pw" type="password" autocomplete="current-password" placeholder="Password" />
+    <input id="pw" type="password" autocomplete="current-password" placeholder="Password" inputmode="numeric" />
     <button id="go" type="button">開啟</button>
+    <div class="ver">v2 · 20 Sep 2026</div>
   </div>
 </div>
 <div id="app">
@@ -255,29 +258,45 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
 <script>
 (function () {
   const HASH = "f800682a1301adcb12543495037ccf3ca5200c62f9e2ee2f9613712011ab6ffe";
-  const KEY = "family-timetable-unlocked-v1";
+  const KEY = "family-timetable-unlocked-v2";
+  function normalize(text) {
+    // trim + full-width digits to ASCII
+    return (text || "").trim().replace(/[０-９]/g, function (ch) {
+      return String.fromCharCode(ch.charCodeAt(0) - 0xFF10 + 0x30);
+    });
+  }
   async function sha256(text) {
     const data = new TextEncoder().encode(text);
     const buf = await crypto.subtle.digest("SHA-256", data);
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    return Array.from(new Uint8Array(buf)).map(function (b) {
+      return b.toString(16).padStart(2, "0");
+    }).join("");
   }
   function unlock() {
     document.getElementById("gate").style.display = "none";
     document.getElementById("app").classList.add("show");
   }
-  if (sessionStorage.getItem(KEY) === HASH) unlock();
-  document.getElementById("go").addEventListener("click", async () => {
-    const v = document.getElementById("pw").value || "";
-    const hh = await sha256(v);
+  try {
+    if (sessionStorage.getItem(KEY) === HASH) unlock();
+  } catch (e) {}
+  async function tryUnlock() {
+    var v = normalize(document.getElementById("pw").value);
+    document.getElementById("err").textContent = "";
+    if (!window.crypto || !window.crypto.subtle) {
+      document.getElementById("err").textContent = "瀏覽器唔支援，請用 Chrome / Safari 開呢個 HTTPS 連結。";
+      return;
+    }
+    var hh = await sha256(v);
     if (hh === HASH) {
-      sessionStorage.setItem(KEY, HASH);
+      try { sessionStorage.setItem(KEY, HASH); } catch (e) {}
       unlock();
     } else {
-      document.getElementById("err").textContent = "密碼唔啱，再試一次。";
+      document.getElementById("err").textContent = "密碼唔啱（請確認係 8 位數字，冇空格）。";
     }
-  });
-  document.getElementById("pw").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") document.getElementById("go").click();
+  }
+  document.getElementById("go").addEventListener("click", tryUnlock);
+  document.getElementById("pw").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tryUnlock();
   });
 })();
 </script>
