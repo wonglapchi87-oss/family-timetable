@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>家庭時間表</title>
+<style>
+
+
+
+:root {
+  --paper: #f7f3ea;
+  --ink: #1f2a2e;
+  --muted: #6b7378;
+  --teal: #0f766e;
+  --teal-soft: #ccfbf1;
+  --card: #fffdf8;
+  --line: #e5ddd0;
+  --henry: #2563eb;
+  --hayley: #db2777;
+  --family: #0f766e;
+  --school: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--paper); color: var(--ink);
+}
+.hero {
+  background: linear-gradient(135deg, #0f766e, #115e59);
+  color: #ecfdf5; padding: 28px 24px 24px;
+}
+.hero h1 { margin: 0 0 6px; font-size: 1.55rem; font-weight: 700; }
+.hero p { margin: 0; opacity: .9; font-size: .95rem; }
+.wrap { padding: 18px 16px 40px; max-width: 1100px; margin: 0 auto; }
+.legend {
+  display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 0 0 16px;
+  font-size: .82rem; color: var(--muted);
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+.dot.henry { background: var(--henry); }
+.dot.hayley { background: var(--hayley); }
+.dot.family { background: var(--family); }
+.dot.school { background: var(--school); }
+.note {
+  background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412;
+  border-radius: 12px; padding: 10px 14px; font-size: .88rem; margin-bottom: 16px;
+}
+table.cal {
+  width: 100%; border-collapse: separate; border-spacing: 8px;
+  table-layout: fixed;
+}
+th {
+  font-size: .75rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted); font-weight: 600; padding: 4px;
+}
+td.day {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; vertical-align: top; min-height: 120px;
+  padding: 8px; height: 140px;
+}
+td.day.empty { background: transparent; border: 1px dashed #ddd5c8; opacity: .45; }
+td.day.mute { opacity: .45; }
+td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
+.dn { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.dn .num { font-weight: 700; font-size: 1rem; }
+.dn .wd { font-size: .7rem; color: var(--muted); }
+.items { display: flex; flex-direction: column; gap: 5px; }
+.ev {
+  border-radius: 8px; padding: 5px 7px; font-size: .72rem; line-height: 1.25;
+  border-left: 3px solid #999; background: #f8faf9;
+}
+.ev.henry { border-left-color: var(--henry); background: #eff6ff; }
+.ev.hayley { border-left-color: var(--hayley); background: #fdf2f8; }
+.ev.family { border-left-color: var(--family); background: var(--teal-soft); }
+.ev.school { border-left-color: var(--school); background: #fffbeb; }
+.ev .t { font-weight: 700; color: var(--ink); }
+.ev .ttl { color: var(--ink); }
+.ev .place { color: var(--muted); font-size: .68rem; }
+.quiet { color: #c4bdb2; font-size: .75rem; padding: 2px 0; }
+.list {
+  margin-top: 28px; background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 18px 18px 8px;
+}
+.list h2 { margin: 0 0 12px; font-size: 1.1rem; color: var(--teal); }
+.list h3 { margin: 16px 0 6px; font-size: .95rem; }
+.list ul { margin: 0 0 8px; padding-left: 1.1rem; }
+.list li { margin: 3px 0; font-size: .9rem; }
+@media print {
+  body { background: #fff; }
+  .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  td.day { break-inside: avoid; }
+}
+@media (max-width: 800px) {
+  table.cal, tbody, tr, td, th { display: block; width: 100%; }
+  th { display: none; }
+  td.day.empty { display: none; }
+  td.day { height: auto; margin-bottom: 8px; }
+}
+
+
+
+.gate {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #0f766e, #115e59); padding: 24px;
+}
+.gate-card {
+  background: #fffdf8; border-radius: 16px; padding: 28px 24px; max-width: 360px; width: 100%;
+  box-shadow: 0 12px 40px rgba(0,0,0,.2);
+}
+.gate-card h1 { margin: 0 0 8px; font-size: 1.25rem; color: #1f2a2e; }
+.gate-card p { margin: 0 0 16px; color: #6b7378; font-size: .9rem; }
+.gate-card input {
+  width: 100%; padding: 12px 14px; border: 1px solid #e5ddd0; border-radius: 10px;
+  font-size: 1rem; margin-bottom: 12px; box-sizing: border-box;
+}
+.gate-card button {
+  width: 100%; padding: 12px; border: 0; border-radius: 10px; background: #0f766e;
+  color: #ecfdf5; font-weight: 700; font-size: 1rem; cursor: pointer;
+}
+.gate-card .err { color: #9a3412; font-size: .85rem; min-height: 1.2em; margin-bottom: 8px; }
+#app { display: none; }
+#app.show { display: block; }
+</style>
+</head>
+<body>
+<div id="gate" class="gate">
+  <div class="gate-card">
+    <h1>家庭時間表</h1>
+    <p>輸入密碼（Jacky / Maggie）</p>
+    <div class="err" id="err"></div>
+    <input id="pw" type="password" autocomplete="current-password" placeholder="Password" />
+    <button id="go" type="button">開啟</button>
+  </div>
+</div>
+<div id="app">
+  <header class="hero">
+    <h1>家庭時間表 · 2026 年 9–10 月</h1>
+    <p>20 Sep–4 Oct · Australia/Perth · Family + primary · rebuilt 2026-09-20 08:13 PT</p>
+  </header>
+  <div class="wrap">
+    <div class="legend">
+      <span><i class="dot henry"></i>Henry</span>
+      <span><i class="dot hayley"></i>Hayley</span>
+      <span><i class="dot family"></i>Family / lessons</span>
+      <span><i class="dot school"></i>School / standing</span>
+    </div>
+    <div class="note">Sun 20：Henry GP 14:50–15:05 同 Hayley GP 15:00–15:15 重疊 5 分鐘（同一診所連續約診）。 Wed 23：standing Bee 16:45–17:45 同 Learning Bee 16:55–17:55 重疊。</div>
+    <table class="cal">
+      <thead>
+        <tr>
+          <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+<td class="day mute">
+  <div class="dn"><span class="num">14</span><span class="wd">一</span></div>
+  <div class="items"></div>
+</td>
+<td class="day mute">
+  <div class="dn"><span class="num">15</span><span class="wd">二</span></div>
+  <div class="items"></div>
+</td>
+<td class="day mute">
+  <div class="dn"><span class="num">16</span><span class="wd">三</span></div>
+  <div class="items"></div>
+</td>
+<td class="day mute">
+  <div class="dn"><span class="num">17</span><span class="wd">四</span></div>
+  <div class="items"></div>
+</td>
+<td class="day mute">
+  <div class="dn"><span class="num">18</span><span class="wd">五</span></div>
+  <div class="items"></div>
+</td>
+<td class="day mute">
+  <div class="dn"><span class="num">19</span><span class="wd">六</span></div>
+  <div class="items"></div>
+</td>
+<td class="day today">
+  <div class="dn"><span class="num">20</span><span class="wd">日</span></div>
+  <div class="items"><div class="ev henry"><div class="t">09:00–10:00</div><div class="ttl">Henry · last AUS KEY English Writing</div></div><div class="ev family"><div class="t">11:30–13:30</div><div class="ttl">Noah birthday party</div></div><div class="ev henry"><div class="t">14:50–15:05</div><div class="ttl">Henry GP — Dr Ei Mon Latt</div><div class="place">Shop 24 / 366 Albany Highway, Victoria Park WA 6100</div></div><div class="ev hayley"><div class="t">15:00–15:15</div><div class="ttl">Hayley GP — Dr Ei Mon Latt</div><div class="place">Shop 24 / 366 Albany Highway, Victoria Park WA 6100</div></div><div class="ev family"><div class="t">16:30–17:30</div><div class="ttl">Chinese lesson</div></div></div>
+</td>
+</tr><tr>
+<td class="day">
+  <div class="dn"><span class="num">21</span><span class="wd">一</span></div>
+  <div class="items"><div class="quiet">—</div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">22</span><span class="wd">二</span></div>
+  <div class="items"><div class="ev hayley"><div class="t">17:00–18:00</div><div class="ttl">Hayley · gym</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">23</span><span class="wd">三</span></div>
+  <div class="items"><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div><div class="ev henry"><div class="t">16:55–17:55</div><div class="ttl">Henry · Learning Bee</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">24</span><span class="wd">四</span></div>
+  <div class="items"><div class="ev school"><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div><div class="ev family"><div class="t">19:00–20:45</div><div class="ttl">Regent Concert (Y1–6)</div><div class="place">Riverview Church</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">25</span><span class="wd">五</span></div>
+  <div class="items"><div class="ev school"><div class="t">全日</div><div class="ttl">Term 3 final day</div></div><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">26</span><span class="wd">六</span></div>
+  <div class="items"><div class="ev hayley"><div class="t">09:00–11:00</div><div class="ttl">Hayley · Josephine jungle gym</div><div class="place">Josephine jungle gym</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">27</span><span class="wd">日</span></div>
+  <div class="items"><div class="ev family"><div class="t">09:30–10:30</div><div class="ttl">Chinese lesson</div></div><div class="ev family"><div class="t">11:30–13:00</div><div class="ttl">Family · Perth Mint</div><div class="place">Perth Mint</div></div></div>
+</td>
+</tr><tr>
+<td class="day">
+  <div class="dn"><span class="num">28</span><span class="wd">一</span></div>
+  <div class="items"><div class="quiet">—</div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">29</span><span class="wd">二</span></div>
+  <div class="items"><div class="ev family"><div class="t">全日</div><div class="ttl">Stay at Hilton Sydney</div><div class="place">488 George Street, Sydney</div></div><div class="ev hayley"><div class="t">17:00–18:00</div><div class="ttl">Hayley · gym</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">30</span><span class="wd">三</span></div>
+  <div class="items"><div class="ev family"><div class="t">全日</div><div class="ttl">Stay at Hilton Sydney</div></div><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">1</span><span class="wd">四</span></div>
+  <div class="items"><div class="ev family"><div class="t">全日</div><div class="ttl">Stay at Hilton Sydney</div></div><div class="ev school"><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">2</span><span class="wd">五</span></div>
+  <div class="items"><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">3</span><span class="wd">六</span></div>
+  <div class="items"><div class="ev family"><div class="t">10:00–17:00</div><div class="ttl">Perth Royal Show</div><div class="place">Claremont Showground, Perth</div></div></div>
+</td>
+<td class="day">
+  <div class="dn"><span class="num">4</span><span class="wd">日</span></div>
+  <div class="items"><div class="quiet">—</div></div>
+</td>
+</tr>
+      </tbody>
+    </table>
+
+    <section class="list">
+      <h2>詳細清單 · 20 Sep–4 Oct</h2>
+<h3>Sun 20 Sep</h3><ul><li><strong>09:00–10:00</strong> — Henry · last AUS KEY English Writing</li><li><strong>11:30–13:30</strong> — Noah birthday party</li><li><strong>14:50–15:05</strong> — Henry GP — Dr Ei Mon Latt · Shop 24 / 366 Albany Highway, Victoria Park WA 6100</li><li><strong>15:00–15:15</strong> — Hayley GP — Dr Ei Mon Latt · Shop 24 / 366 Albany Highway, Victoria Park WA 6100</li><li><strong>16:30–17:30</strong> — Chinese lesson</li></ul><h3>Mon 21 Sep</h3><ul><li>quiet</li></ul><h3>Tue 22 Sep</h3><ul><li><strong>17:00–18:00</strong> — Hayley · gym</li></ul><h3>Wed 23 Sep</h3><ul><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li><li><strong>16:55–17:55</strong> — Henry · Learning Bee</li></ul><h3>Thu 24 Sep</h3><ul><li><strong>16:30–17:00</strong> — State Swim</li><li><strong>19:00–20:45</strong> — Regent Concert (Y1–6) · Riverview Church</li></ul><h3>Fri 25 Sep</h3><ul><li><strong>全日</strong> — Term 3 final day</li><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 26 Sep</h3><ul><li><strong>09:00–11:00</strong> — Hayley · Josephine jungle gym · Josephine jungle gym</li></ul><h3>Sun 27 Sep</h3><ul><li><strong>09:30–10:30</strong> — Chinese lesson</li><li><strong>11:30–13:00</strong> — Family · Perth Mint · Perth Mint</li></ul><h3>Mon 28 Sep</h3><ul><li>quiet</li></ul><h3>Tue 29 Sep</h3><ul><li><strong>全日</strong> — Stay at Hilton Sydney · 488 George Street, Sydney</li><li><strong>17:00–18:00</strong> — Hayley · gym</li></ul><h3>Wed 30 Sep</h3><ul><li><strong>全日</strong> — Stay at Hilton Sydney</li><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li></ul><h3>Thu 1 Oct</h3><ul><li><strong>全日</strong> — Stay at Hilton Sydney</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 2 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 3 Oct</h3><ul><li><strong>10:00–17:00</strong> — Perth Royal Show · Claremont Showground, Perth</li></ul><h3>Sun 4 Oct</h3><ul><li>quiet</li></ul>
+    </section>
+  </div>
+</div>
+<script>
+(function () {
+  const HASH = "42d7b0e44d50f72990275b22683e05cefca6123b8d8a974e112897c8055abad4";
+  const KEY = "family-timetable-unlocked-v1";
+  async function sha256(text) {
+    const data = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+  function unlock() {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app").classList.add("show");
+  }
+  if (sessionStorage.getItem(KEY) === HASH) unlock();
+  document.getElementById("go").addEventListener("click", async () => {
+    const v = document.getElementById("pw").value || "";
+    const h = await sha256(v);
+    if (h === HASH) {
+      sessionStorage.setItem(KEY, HASH);
+      unlock();
+    } else {
+      document.getElementById("err").textContent = "密碼唔啱，再試一次。";
+    }
+  });
+  document.getElementById("pw").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") document.getElementById("go").click();
+  });
+})();
+</script>
+</body>
+</html>
