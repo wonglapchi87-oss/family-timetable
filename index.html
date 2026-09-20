@@ -254,7 +254,7 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
 </div>
 <script>
 (function () {
-  const HASH = "42d7b0e44d50f72990275b22683e05cefca6123b8d8a974e112897c8055abad4";
+  const HASH = "f800682a1301adcb12543495037ccf3ca5200c62f9e2ee2f9613712011ab6ffe";
   const KEY = "family-timetable-unlocked-v1";
   async function sha256(text) {
     const data = new TextEncoder().encode(text);
@@ -268,8 +268,8 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
   if (sessionStorage.getItem(KEY) === HASH) unlock();
   document.getElementById("go").addEventListener("click", async () => {
     const v = document.getElementById("pw").value || "";
-    const h = await sha256(v);
-    if (h === HASH) {
+    const hh = await sha256(v);
+    if (hh === HASH) {
       sessionStorage.setItem(KEY, HASH);
       unlock();
     } else {
