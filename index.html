@@ -8,7 +8,6 @@
 <title>家庭時間表</title>
 <style>
 
-
 :root {
   --paper: #f7f3ea;
   --ink: #1f2a2e;
@@ -101,7 +100,6 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
 }
 
 
-
 .gate {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, #0f766e, #115e59); padding: 24px;
@@ -135,13 +133,13 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
     <div class="err" id="err"></div>
     <input id="pw" type="password" autocomplete="current-password" placeholder="Password" inputmode="numeric" />
     <button id="go" type="button">開啟</button>
-    <div class="ver">v2 · 28 Sep 2026</div>
+    <div class="ver">v2 · 2 Oct 2026</div>
   </div>
 </div>
 <div id="app">
   <header class="hero">
-    <h1>家庭時間表 · 2026 年 9–10 月</h1>
-    <p>28 Sep–12 Oct · Australia/Perth · Family + primary · rebuilt 2026-09-28 08:10 PT</p>
+    <h1>家庭時間表 · 2026 年 10 月</h1>
+    <p>2–16 Oct · Australia/Perth · Family + primary + Outlook · rebuilt 2026-10-02 08:09 PT</p>
   </header>
   <div class="wrap">
     <div class="legend">
@@ -150,7 +148,7 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
       <span><i class="dot family"></i>Family / lessons</span>
       <span><i class="dot school"></i>School / standing</span>
     </div>
-    <div class="note">29 Sep–1 Oct：Hilton Sydney 同日仍有 Perth standing（gym / Bee / State Swim）— calendar 仍顯示，外出時請自行跳過。</div>
+    <div class="note">9 Oct（五）：Outlook「Bee」14:00–15:45 與 Kiss and Drive 15:00–16:00 重疊 — 請核對是否同一行程或需調整。<br/>16 Oct（五）：Kiss and Drive 15:00–16:00 緊接 Henry UPlus 16:00–17:30 — 交接偏緊。</div>
     <table class="cal">
       <thead>
         <tr>
@@ -159,23 +157,23 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
       </thead>
       <tbody>
 <tr>
-<td class="day today">
+<td class="day mute">
   <div class="dn"><span class="num">28</span><span class="wd">一</span></div>
   <div class="items"><div class="quiet">—</div></div>
 </td>
-<td class="day">
+<td class="day mute">
   <div class="dn"><span class="num">29</span><span class="wd">二</span></div>
-  <div class="items"><div class="ev hayley"><div class="t">17:00–18:00</div><div class="ttl">Hayley · gym</div></div><div class="ev family"><div class="t">全日</div><div class="ttl">Stay at Hilton Sydney</div><div class="place">488 George Street, Sydney</div></div></div>
+  <div class="items"><div class="quiet">—</div></div>
 </td>
-<td class="day">
+<td class="day mute">
   <div class="dn"><span class="num">30</span><span class="wd">三</span></div>
-  <div class="items"><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div><div class="ev family"><div class="t">全日</div><div class="ttl">Stay at Hilton Sydney</div><div class="place">488 George Street, Sydney</div></div></div>
+  <div class="items"><div class="quiet">—</div></div>
 </td>
-<td class="day">
+<td class="day mute">
   <div class="dn"><span class="num">1</span><span class="wd">四</span></div>
-  <div class="items"><div class="ev school"><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div><div class="ev family"><div class="t">全日</div><div class="ttl">Stay at Hilton Sydney</div><div class="place">488 George Street, Sydney</div></div></div>
+  <div class="items"><div class="quiet">—</div></div>
 </td>
-<td class="day">
+<td class="day today">
   <div class="dn"><span class="num">2</span><span class="wd">五</span></div>
   <div class="items"><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
 </td>
@@ -199,7 +197,7 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
 </td>
 <td class="day">
   <div class="dn"><span class="num">7</span><span class="wd">三</span></div>
-  <div class="items"><div class="ev henry"><div class="t">14:40–16:10</div><div class="ttl">Henry · Learning Bee NAPLAN English Workshop</div><div class="place">The Learning Bee</div></div><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div></div>
+  <div class="items"><div class="ev family"><div class="t">12:30–13:15</div><div class="ttl">Piano trial + interview · The Pianist Music Academy (Sophia)</div><div class="place">1b/9 Yampi Way, Willetton WA</div></div><div class="ev henry"><div class="t">14:40–16:10</div><div class="ttl">Henry · Learning Bee NAPLAN English Workshop</div><div class="place">The Learning Bee</div></div><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div></div>
 </td>
 <td class="day">
   <div class="dn"><span class="num">8</span><span class="wd">四</span></div>
@@ -207,7 +205,7 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
 </td>
 <td class="day">
   <div class="dn"><span class="num">9</span><span class="wd">五</span></div>
-  <div class="items"><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
+  <div class="items"><div class="ev henry"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
 </td>
 <td class="day">
   <div class="dn"><span class="num">10</span><span class="wd">六</span></div>
@@ -221,23 +219,23 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
 <tr>
 <td class="day">
   <div class="dn"><span class="num">12</span><span class="wd">一</span></div>
-  <div class="items"><div class="ev henry"><div class="t">16:10–17:10</div><div class="ttl">Henry · Learning Bee NAPLAN Prep Writing</div><div class="place">The Learning Bee</div></div></div>
+  <div class="items"><div class="ev henry"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev henry"><div class="t">16:10–17:10</div><div class="ttl">Henry · Learning Bee NAPLAN Prep Writing</div><div class="place">The Learning Bee</div></div></div>
 </td>
-<td class="day mute">
+<td class="day">
   <div class="dn"><span class="num">13</span><span class="wd">二</span></div>
-  <div class="items"><div class="quiet">—</div></div>
+  <div class="items"><div class="ev hayley"><div class="t">17:00–18:00</div><div class="ttl">Hayley · GFA FUNdamentals Gym</div><div class="place">Leederville GFA</div></div></div>
 </td>
-<td class="day mute">
+<td class="day">
   <div class="dn"><span class="num">14</span><span class="wd">三</span></div>
-  <div class="items"><div class="quiet">—</div></div>
+  <div class="items"><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div></div>
 </td>
-<td class="day mute">
+<td class="day">
   <div class="dn"><span class="num">15</span><span class="wd">四</span></div>
-  <div class="items"><div class="quiet">—</div></div>
+  <div class="items"><div class="ev henry"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev school"><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div></div>
 </td>
-<td class="day mute">
+<td class="day">
   <div class="dn"><span class="num">16</span><span class="wd">五</span></div>
-  <div class="items"><div class="quiet">—</div></div>
+  <div class="items"><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div><div class="ev henry"><div class="t">16:00–17:30</div><div class="ttl">Henry · UPlus English + Maths</div></div></div>
 </td>
 <td class="day mute">
   <div class="dn"><span class="num">17</span><span class="wd">六</span></div>
@@ -252,12 +250,13 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
     </table>
 
     <section class="list">
-      <h2>詳細清單 · 28 Sep–12 Oct</h2>
-<h3>Mon 28 Sep</h3><ul><li>quiet</li></ul><h3>Tue 29 Sep</h3><ul><li><strong>17:00–18:00</strong> — Hayley · gym</li><li><strong>全日</strong> — Stay at Hilton Sydney · 488 George Street, Sydney</li></ul><h3>Wed 30 Sep</h3><ul><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li><li><strong>全日</strong> — Stay at Hilton Sydney · 488 George Street, Sydney</li></ul><h3>Thu 1 Oct</h3><ul><li><strong>16:30–17:00</strong> — State Swim</li><li><strong>全日</strong> — Stay at Hilton Sydney · 488 George Street, Sydney</li></ul><h3>Fri 2 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 3 Oct</h3><ul><li><strong>10:00–17:00</strong> — Perth Royal Show · Claremont Showground, Perth</li></ul><h3>Sun 4 Oct</h3><ul><li>quiet</li></ul><h3>Mon 5 Oct</h3><ul><li>quiet</li></ul><h3>Tue 6 Oct</h3><ul><li><strong>08:30–09:00</strong> — TODO: cancel Regent OSHC for Bee Mondays (12 Oct–7 Dec)</li><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>17:00–18:00</strong> — Hayley · gym</li></ul><h3>Wed 7 Oct</h3><ul><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li></ul><h3>Thu 8 Oct</h3><ul><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 9 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 10 Oct</h3><ul><li>quiet</li></ul><h3>Sun 11 Oct</h3><ul><li>quiet</li></ul><h3>Mon 12 Oct</h3><ul><li><strong>16:10–17:10</strong> — Henry · Learning Bee NAPLAN Prep Writing · The Learning Bee</li></ul>
+      <h2>詳細清單 · 2–16 Oct</h2>
+<h3>Fri 2 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 3 Oct</h3><ul><li><strong>10:00–17:00</strong> — Perth Royal Show · Claremont Showground, Perth</li></ul><h3>Sun 4 Oct</h3><ul><li>quiet</li></ul><h3>Mon 5 Oct</h3><ul><li>quiet</li></ul><h3>Tue 6 Oct</h3><ul><li><strong>08:30–09:00</strong> — TODO: cancel Regent OSHC for Bee Mondays (12 Oct–7 Dec)</li><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>17:00–18:00</strong> — Hayley · gym</li></ul><h3>Wed 7 Oct</h3><ul><li><strong>12:30–13:15</strong> — Piano trial + interview · The Pianist Music Academy (Sophia) · 1b/9 Yampi Way, Willetton WA</li><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li></ul><h3>Thu 8 Oct</h3><ul><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 9 Oct</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 10 Oct</h3><ul><li>quiet</li></ul><h3>Sun 11 Oct</h3><ul><li>quiet</li></ul><h3>Mon 12 Oct</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>16:10–17:10</strong> — Henry · Learning Bee NAPLAN Prep Writing · The Learning Bee</li></ul><h3>Tue 13 Oct</h3><ul><li><strong>17:00–18:00</strong> — Hayley · GFA FUNdamentals Gym · Leederville GFA</li></ul><h3>Wed 14 Oct</h3><ul><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li></ul><h3>Thu 15 Oct</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 16 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li><li><strong>16:00–17:30</strong> — Henry · UPlus English + Maths</li></ul>
     </section>
   </div>
 </div>
 <script>
+
 (function () {
   const HASH = "f800682a1301adcb12543495037ccf3ca5200c62f9e2ee2f9613712011ab6ffe";
   const KEY = "family-timetable-unlocked-v2";
@@ -300,6 +299,7 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
     if (ev.key === "Enter") tryUnlock();
   });
 })();
+
 </script>
 </body>
 </html>
