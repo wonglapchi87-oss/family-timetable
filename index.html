@@ -7,97 +7,68 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <title>家庭時間表</title>
 <style>
+:root{--bg:#efebe3;--ink:#1c1917;--muted:#6b6560;--card:#fffdf9;--line:#ddd4c6;--accent:#0f766e;
+--henry:#1d4ed8;--henry-bg:#dbeafe;--hayley:#be185d;--hayley-bg:#fce7f3;--family:#b45309;--family-bg:#ffedd5;
+--school:#0f766e;--school-bg:#ccfbf1;--possible:#7c3aed;--possible-bg:#ede9fe;--warn:#d97706}
+*{box-sizing:border-box}html{font-size:18px}
+body{margin:0;font-family:"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--ink);line-height:1.4;
+background:radial-gradient(1400px 700px at 8% -8%,#d1fae5 0%,transparent 55%),radial-gradient(1000px 600px at 100% 0%,#fce7f3 0%,transparent 48%),var(--bg)}
+.wrap{max-width:1480px;margin:0 auto;padding:28px 24px 80px}
+header.hero{background:linear-gradient(135deg,#0f766e 0%,#115e59 42%,#1e3a5f 100%);color:#fff;border-radius:28px;padding:34px 40px;box-shadow:0 16px 48px rgba(28,25,23,.12)}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:.5rem}
+h1{margin:0 0 .4rem;font-size:clamp(2rem,3.4vw,2.9rem);font-weight:750;letter-spacing:-.02em}
+.sub{margin:0;opacity:.92;font-size:1rem;max-width:52em}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem}
+.chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:.4rem .85rem;border-radius:999px;font-size:.88rem}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:1.1rem 0 1rem}
+.legend span{display:inline-flex;align-items:center;gap:.45rem;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.45rem .9rem;font-size:.88rem}
+.legend .tightkey{border-color:var(--warn);color:#92400e;background:#fffbeb;font-weight:650}
+.sw{width:12px;height:12px;border-radius:50%}.sw.henry{background:var(--henry)}.sw.hayley{background:var(--hayley)}.sw.family{background:var(--family)}.sw.school{background:var(--school)}.sw.possible{background:var(--possible)}
+.rhythm{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.2rem 1.4rem;margin-bottom:1.4rem;box-shadow:0 8px 28px rgba(28,25,23,.06)}
+.rhythm h2{margin:0 0 .75rem;font-size:1.15rem}
+.rhythm-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.rc{border:1px solid var(--line);border-radius:14px;background:#fff;padding:.75rem .85rem}
+.rc strong{display:block;color:var(--accent);font-size:.85rem;margin-bottom:.25rem}.rc span{font-size:.86rem;color:var(--muted)}
+.note{margin-top:.9rem;padding:.75rem 1rem;border-radius:14px;background:#fffbeb;border:1px solid #fcd34d;color:#92400e;font-size:.9rem}
+.month{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:1.2rem 1.2rem 1.5rem;box-shadow:0 10px 32px rgba(28,25,23,.07)}
+.colheads,.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.colhead{text-align:center;padding:.35rem 0 .55rem;color:var(--muted);font-weight:700}
+.colhead .zh{display:block;font-size:.95rem}.colhead .en{display:block;font-size:.72rem;font-weight:500;opacity:.8}
+.weeks{display:flex;flex-direction:column;gap:8px}
+.daycell{min-height:170px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:10px 9px 12px;min-width:0}
+.daycell.out{opacity:.25;background:#f5f1ea;min-height:60px}
+.daycell.wkend{background:#faf7f2}
+.daycell.today{box-shadow:inset 0 0 0 2px var(--accent)}
+.daycell.tight{border:2px solid var(--warn);background:#fffbeb}
+.dnum{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+.dnum .n{font-size:1.3rem;font-weight:750;line-height:1}.dnum .w{font-size:.75rem;color:var(--muted);display:none}
+.gap{font-size:.74rem;font-weight:700;color:#92400e;background:#fde68a;border-radius:8px;padding:4px 6px;margin-bottom:6px;line-height:1.25}
+.elist{display:flex;flex-direction:column;gap:6px}
+.ev{border-radius:10px;padding:7px 8px;border:1px solid transparent;font-size:.8rem;line-height:1.25}
+.ev .t{font-weight:750;font-variant-numeric:tabular-nums;margin-bottom:2px}
+.ev .ttl{font-weight:650;overflow-wrap:anywhere}
+.ev .loc{margin-top:2px;color:var(--muted);font-size:.72rem;font-weight:500}
+.ev.henry{background:var(--henry-bg);border-color:#bfdbfe;color:#1e3a8a}.ev.henry .t{color:var(--henry)}
+.ev.hayley{background:var(--hayley-bg);border-color:#fbcfe8;color:#9d174d}.ev.hayley .t{color:var(--hayley)}
+.ev.family{background:var(--family-bg);border-color:#fed7aa;color:#9a3412}.ev.family .t{color:var(--family)}
+.ev.school{background:var(--school-bg);border-color:#99f6e4;color:#115e59}.ev.school .t{color:var(--school)}
+.ev.possible{background:var(--possible-bg);border-color:#ddd6fe;color:#5b21b6;border-style:dashed}.ev.possible .t{color:var(--possible)}
+.ev.allday{background:var(--family);color:#fff;border-color:var(--family)}.ev.allday .t,.ev.allday .loc{color:#fff;opacity:.92}
+.ev.clash{outline:2px dashed var(--warn);outline-offset:-2px}
+.ev.cancelled{opacity:.7}.ev.cancelled .ttl{text-decoration:line-through}
+.quiet{color:#c4bbb0;font-size:.9rem}
+footer{margin-top:1.5rem;text-align:center;color:var(--muted);font-size:.85rem}
+@media (max-width:1100px){html{font-size:16px}.rhythm-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:820px){.wrap{padding:16px 10px 64px}header.hero{padding:24px 20px}.colheads{display:none}
+.week{grid-template-columns:1fr}.daycell.out{display:none}.daycell{min-height:0}.dnum .w{display:inline}
+.rhythm-grid{grid-template-columns:1fr 1fr}.ev{font-size:.95rem;padding:10px 12px}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}html{font-size:13px}.month,.daycell,.rhythm{box-shadow:none;break-inside:avoid}}
 
-:root {
-  --paper: #f7f3ea;
-  --ink: #1f2a2e;
-  --muted: #6b7378;
-  --teal: #0f766e;
-  --teal-soft: #ccfbf1;
-  --card: #fffdf8;
-  --line: #e5ddd0;
-  --henry: #2563eb;
-  --hayley: #db2777;
-  --family: #0f766e;
-  --school: #b45309;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  background: var(--paper); color: var(--ink);
-}
-.hero {
-  background: linear-gradient(135deg, #0f766e, #115e59);
-  color: #ecfdf5; padding: 28px 24px 24px;
-}
-.hero h1 { margin: 0 0 6px; font-size: 1.55rem; font-weight: 700; }
-.hero p { margin: 0; opacity: .9; font-size: .95rem; }
-.wrap { padding: 18px 16px 40px; max-width: 1100px; margin: 0 auto; }
-.legend {
-  display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 0 0 16px;
-  font-size: .82rem; color: var(--muted);
-}
-.legend span { display: inline-flex; align-items: center; gap: 6px; }
-.dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
-.dot.henry { background: var(--henry); }
-.dot.hayley { background: var(--hayley); }
-.dot.family { background: var(--family); }
-.dot.school { background: var(--school); }
-.note {
-  background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412;
-  border-radius: 12px; padding: 10px 14px; font-size: .88rem; margin-bottom: 16px;
-}
-table.cal {
-  width: 100%; border-collapse: separate; border-spacing: 8px;
-  table-layout: fixed;
-}
-th {
-  font-size: .75rem; text-transform: uppercase; letter-spacing: .04em;
-  color: var(--muted); font-weight: 600; padding: 4px;
-}
-td.day {
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 14px; vertical-align: top; min-height: 120px;
-  padding: 8px; height: 140px;
-}
-td.day.empty { background: transparent; border: 1px dashed #ddd5c8; opacity: .45; }
-td.day.mute { opacity: .45; }
-td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
-.dn { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-.dn .num { font-weight: 700; font-size: 1rem; }
-.dn .wd { font-size: .7rem; color: var(--muted); }
-.items { display: flex; flex-direction: column; gap: 5px; }
-.ev {
-  border-radius: 8px; padding: 5px 7px; font-size: .72rem; line-height: 1.25;
-  border-left: 3px solid #999; background: #f8faf9;
-}
-.ev.henry { border-left-color: var(--henry); background: #eff6ff; }
-.ev.hayley { border-left-color: var(--hayley); background: #fdf2f8; }
-.ev.family { border-left-color: var(--family); background: var(--teal-soft); }
-.ev.school { border-left-color: var(--school); background: #fffbeb; }
-.ev .t { font-weight: 700; color: var(--ink); }
-.ev .ttl { color: var(--ink); }
-.ev .place { color: var(--muted); font-size: .68rem; }
-.quiet { color: #c4bdb2; font-size: .75rem; padding: 2px 0; }
-.list {
-  margin-top: 28px; background: var(--card); border: 1px solid var(--line);
-  border-radius: 16px; padding: 18px 18px 8px;
-}
-.list h2 { margin: 0 0 12px; font-size: 1.1rem; color: var(--teal); }
-.list h3 { margin: 16px 0 6px; font-size: .95rem; }
-.list ul { margin: 0 0 8px; padding-left: 1.1rem; }
-.list li { margin: 3px 0; font-size: .9rem; }
-@media print {
-  body { background: #fff; }
-  .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  td.day { break-inside: avoid; }
-}
-@media (max-width: 800px) {
-  table.cal, tbody, tr, td, th { display: block; width: 100%; }
-  th { display: none; }
-  td.day.empty { display: none; }
-  td.day { height: auto; margin-bottom: 8px; }
-}
+.detail{margin-top:1.4rem;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.2rem 1.4rem;box-shadow:0 8px 28px rgba(28,25,23,.06)}
+.detail h2{margin:0 0 .75rem;font-size:1.15rem;color:var(--accent)}
+.detail h3{margin:1rem 0 .35rem;font-size:.95rem}
+.detail ul{margin:0 0 .5rem;padding-left:1.2rem}
+.detail li{margin:.2rem 0;font-size:.9rem}
 
 
 .gate {
@@ -133,127 +104,33 @@ td.day.today { outline: 2px solid var(--teal); outline-offset: 1px; }
     <div class="err" id="err"></div>
     <input id="pw" type="password" autocomplete="current-password" placeholder="Password" inputmode="numeric" />
     <button id="go" type="button">開啟</button>
-    <div class="ver">v2 · 2 Oct 2026</div>
+    <div class="ver">v2 · 3 Oct 2026</div>
   </div>
 </div>
 <div id="app">
-  <header class="hero">
-    <h1>家庭時間表 · 2026 年 10 月</h1>
-    <p>2–16 Oct · Australia/Perth · Family + primary + Outlook · rebuilt 2026-10-02 08:09 PT</p>
-  </header>
-  <div class="wrap">
-    <div class="legend">
-      <span><i class="dot henry"></i>Henry</span>
-      <span><i class="dot hayley"></i>Hayley</span>
-      <span><i class="dot family"></i>Family / lessons</span>
-      <span><i class="dot school"></i>School / standing</span>
-    </div>
-    <div class="note">9 Oct（五）：Outlook「Bee」14:00–15:45 與 Kiss and Drive 15:00–16:00 重疊 — 請核對是否同一行程或需調整。<br/>16 Oct（五）：Kiss and Drive 15:00–16:00 緊接 Henry UPlus 16:00–17:30 — 交接偏緊。</div>
-    <table class="cal">
-      <thead>
-        <tr>
-          <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
-        </tr>
-      </thead>
-      <tbody>
-<tr>
-<td class="day mute">
-  <div class="dn"><span class="num">28</span><span class="wd">一</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day mute">
-  <div class="dn"><span class="num">29</span><span class="wd">二</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day mute">
-  <div class="dn"><span class="num">30</span><span class="wd">三</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day mute">
-  <div class="dn"><span class="num">1</span><span class="wd">四</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day today">
-  <div class="dn"><span class="num">2</span><span class="wd">五</span></div>
-  <div class="items"><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">3</span><span class="wd">六</span></div>
-  <div class="items"><div class="ev family"><div class="t">10:00–17:00</div><div class="ttl">Perth Royal Show</div><div class="place">Claremont Showground, Perth</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">4</span><span class="wd">日</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-</tr>
-<tr>
-<td class="day">
-  <div class="dn"><span class="num">5</span><span class="wd">一</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">6</span><span class="wd">二</span></div>
-  <div class="items"><div class="ev school"><div class="t">08:30–09:00</div><div class="ttl">TODO: cancel Regent OSHC for Bee Mondays (12 Oct–7 Dec)</div></div><div class="ev henry"><div class="t">14:40–16:10</div><div class="ttl">Henry · Learning Bee NAPLAN English Workshop</div><div class="place">The Learning Bee</div></div><div class="ev hayley"><div class="t">17:00–18:00</div><div class="ttl">Hayley · gym</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">7</span><span class="wd">三</span></div>
-  <div class="items"><div class="ev family"><div class="t">12:30–13:15</div><div class="ttl">Piano trial + interview · The Pianist Music Academy (Sophia)</div><div class="place">1b/9 Yampi Way, Willetton WA</div></div><div class="ev henry"><div class="t">14:40–16:10</div><div class="ttl">Henry · Learning Bee NAPLAN English Workshop</div><div class="place">The Learning Bee</div></div><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">8</span><span class="wd">四</span></div>
-  <div class="items"><div class="ev henry"><div class="t">14:40–16:10</div><div class="ttl">Henry · Learning Bee NAPLAN English Workshop</div><div class="place">The Learning Bee</div></div><div class="ev school"><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">9</span><span class="wd">五</span></div>
-  <div class="items"><div class="ev henry"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">10</span><span class="wd">六</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">11</span><span class="wd">日</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-</tr>
-<tr>
-<td class="day">
-  <div class="dn"><span class="num">12</span><span class="wd">一</span></div>
-  <div class="items"><div class="ev henry"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev henry"><div class="t">16:10–17:10</div><div class="ttl">Henry · Learning Bee NAPLAN Prep Writing</div><div class="place">The Learning Bee</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">13</span><span class="wd">二</span></div>
-  <div class="items"><div class="ev hayley"><div class="t">17:00–18:00</div><div class="ttl">Hayley · GFA FUNdamentals Gym</div><div class="place">Leederville GFA</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">14</span><span class="wd">三</span></div>
-  <div class="items"><div class="ev henry"><div class="t">16:45–17:45</div><div class="ttl">Henry · Bee (standing)</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">15</span><span class="wd">四</span></div>
-  <div class="items"><div class="ev henry"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev school"><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div></div>
-</td>
-<td class="day">
-  <div class="dn"><span class="num">16</span><span class="wd">五</span></div>
-  <div class="items"><div class="ev school"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div><div class="ev henry"><div class="t">16:00–17:30</div><div class="ttl">Henry · UPlus English + Maths</div></div></div>
-</td>
-<td class="day mute">
-  <div class="dn"><span class="num">17</span><span class="wd">六</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-<td class="day mute">
-  <div class="dn"><span class="num">18</span><span class="wd">日</span></div>
-  <div class="items"><div class="quiet">—</div></div>
-</td>
-</tr>
-      </tbody>
-    </table>
+<div class="wrap">
+<header class="hero"><div class="eyebrow">Wong Family · Australia/Perth</div>
+<h1>家庭時間表 · 3–17 Oct 2026</h1>
+<p class="sub">約兩週視窗（今日起）。資料：Google Family + primary + Outlook 日曆實拉，唔會發明行程。時間一律 Perth。重建：3 Oct 2026 ~8:10 am PT。</p>
+<div class="meta"><span class="chip">3–17 Oct 2026</span><span class="chip">21 events</span><span class="chip">Henry · Hayley · Family</span><span class="chip">Updated 3 Oct 2026</span></div></header>
 
-    <section class="list">
-      <h2>詳細清單 · 2–16 Oct</h2>
-<h3>Fri 2 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 3 Oct</h3><ul><li><strong>10:00–17:00</strong> — Perth Royal Show · Claremont Showground, Perth</li></ul><h3>Sun 4 Oct</h3><ul><li>quiet</li></ul><h3>Mon 5 Oct</h3><ul><li>quiet</li></ul><h3>Tue 6 Oct</h3><ul><li><strong>08:30–09:00</strong> — TODO: cancel Regent OSHC for Bee Mondays (12 Oct–7 Dec)</li><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>17:00–18:00</strong> — Hayley · gym</li></ul><h3>Wed 7 Oct</h3><ul><li><strong>12:30–13:15</strong> — Piano trial + interview · The Pianist Music Academy (Sophia) · 1b/9 Yampi Way, Willetton WA</li><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li></ul><h3>Thu 8 Oct</h3><ul><li><strong>14:40–16:10</strong> — Henry · Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 9 Oct</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 10 Oct</h3><ul><li>quiet</li></ul><h3>Sun 11 Oct</h3><ul><li>quiet</li></ul><h3>Mon 12 Oct</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>16:10–17:10</strong> — Henry · Learning Bee NAPLAN Prep Writing · The Learning Bee</li></ul><h3>Tue 13 Oct</h3><ul><li><strong>17:00–18:00</strong> — Hayley · GFA FUNdamentals Gym · Leederville GFA</li></ul><h3>Wed 14 Oct</h3><ul><li><strong>16:45–17:45</strong> — Henry · Bee (standing)</li></ul><h3>Thu 15 Oct</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 16 Oct</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li><li><strong>16:00–17:30</strong> — Henry · UPlus English + Maths</li></ul>
-    </section>
-  </div>
+<div class="legend"><span><i class="sw henry"></i>Henry</span><span><i class="sw hayley"></i>Hayley</span><span><i class="sw family"></i>Family</span><span><i class="sw school"></i>School</span><span><i class="sw possible"></i>Possible</span><span class="tightkey">⚠ 時間重疊／好緊</span></div>
+
+<div class="note">⚠ 6 Oct（星期二）：14:00–15:45「Bee」與 14:40–16:10「Henry — Learning Bee NAPLAN English Workshop」重疊<br/>9 Oct（星期五）：14:00–15:45「Bee」與 15:00–16:00「Kiss and Drive」重疊<br/>16 Oct（星期五）：Kiss and Drive 16:00 完 → UPlus 16:00 即開，無空檔</div>
+
+<div class="rhythm"><h2>固定節奏（視窗內可見）</h2><div class="rhythm-grid">
+<div class="rc"><strong>星期一</strong><span>12 Oct 起 · Bee NAPLAN Prep Writing 16:10–17:10</span></div>
+<div class="rc"><strong>星期二</strong><span>Hayley GFA Gym 17:00–18:00</span></div>
+<div class="rc"><strong>星期三</strong><span>14 Oct · Henry Piano · Jun 17:30–18:30（待 Jun 確認）</span></div>
+<div class="rc"><strong>星期四</strong><span>State Swim 16:30–17:00（8、15 Oct）</span></div>
+<div class="rc"><strong>星期五</strong><span>Kiss and Drive 15:00–16:00；16 Oct 起 UPlus 16:00–17:30</span></div>
+<div class="rc"><strong>星期六</strong><span>今日 Royal Show；17 Oct Badminton [possible] 16:00–17:30</span></div>
+</div></div>
+
+<section class="month"><div class="colheads"><div class="colhead"><span class="zh">星期一</span><span class="en">Mon</span></div><div class="colhead"><span class="zh">星期二</span><span class="en">Tue</span></div><div class="colhead"><span class="zh">星期三</span><span class="en">Wed</span></div><div class="colhead"><span class="zh">星期四</span><span class="en">Thu</span></div><div class="colhead"><span class="zh">星期五</span><span class="en">Fri</span></div><div class="colhead"><span class="zh">星期六</span><span class="en">Sat</span></div><div class="colhead"><span class="zh">星期日</span><span class="en">Sun</span></div></div><div class="weeks"><div class="week"><div class="daycell out"><div class="dnum"><span class="n">28</span><span class="w">一</span></div><div class="elist"></div></div><div class="daycell out"><div class="dnum"><span class="n">29</span><span class="w">二</span></div><div class="elist"></div></div><div class="daycell out"><div class="dnum"><span class="n">30</span><span class="w">三</span></div><div class="elist"></div></div><div class="daycell"><div class="dnum"><span class="n">1</span><span class="w">四</span></div><div class="elist"><div class="quiet">—</div></div></div><div class="daycell"><div class="dnum"><span class="n">2</span><span class="w">五</span></div><div class="elist"><div class="quiet">—</div></div></div><div class="daycell wkend today"><div class="dnum"><span class="n">3</span><span class="w">六</span></div><div class="elist"><div class="ev family "><div class="t">10:00–17:00</div><div class="ttl">Perth Royal Show (tickets bought)</div><div class="loc">Claremont Showground, Perth</div></div><div class="ev family "><div class="t">10:00–11:00</div><div class="ttl">Yellow Brick Road 2026</div><div class="loc">Claremont Showground</div></div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">4</span><span class="w">日</span></div><div class="elist"><div class="quiet">—</div></div></div></div><div class="week"><div class="daycell"><div class="dnum"><span class="n">5</span><span class="w">一</span></div><div class="elist"><div class="quiet">—</div></div></div><div class="daycell"><div class="dnum"><span class="n">6</span><span class="w">二</span></div><div class="gap">⚠ 時間重疊</div><div class="elist"><div class="ev henry "><div class="t">08:30–09:00</div><div class="ttl">TODO: cancel Regent OSHC for Bee Mondays (12 Oct–7 Dec)</div></div><div class="ev henry clash"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev henry clash"><div class="t">14:40–16:10</div><div class="ttl">Henry — Learning Bee NAPLAN English Workshop</div><div class="loc">The Learning Bee</div></div><div class="ev hayley "><div class="t">17:00–18:00</div><div class="ttl">GYM/Hayley</div></div></div></div><div class="daycell"><div class="dnum"><span class="n">7</span><span class="w">三</span></div><div class="elist"><div class="ev family "><div class="t">12:30–13:15</div><div class="ttl">Piano trial + interview – The Pianist Music Academy (Sophia)</div><div class="loc">The Pianist Music Academy, 1b/9 Yampi Way, Willetton WA</div></div><div class="ev henry "><div class="t">14:40–16:10</div><div class="ttl">Henry — Learning Bee NAPLAN English Workshop</div><div class="loc">The Learning Bee</div></div></div></div><div class="daycell"><div class="dnum"><span class="n">8</span><span class="w">四</span></div><div class="elist"><div class="ev henry "><div class="t">14:40–16:10</div><div class="ttl">Henry — Learning Bee NAPLAN English Workshop</div><div class="loc">The Learning Bee</div></div><div class="ev school "><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div></div></div><div class="daycell"><div class="dnum"><span class="n">9</span><span class="w">五</span></div><div class="gap">⚠ 時間重疊</div><div class="elist"><div class="ev henry clash"><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev school clash"><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">10</span><span class="w">六</span></div><div class="elist"><div class="quiet">—</div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">11</span><span class="w">日</span></div><div class="elist"><div class="quiet">—</div></div></div></div><div class="week"><div class="daycell"><div class="dnum"><span class="n">12</span><span class="w">一</span></div><div class="elist"><div class="ev henry "><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev henry "><div class="t">16:10–17:10</div><div class="ttl">Henry — Learning Bee NAPLAN Prep Writing</div><div class="loc">The Learning Bee</div></div></div></div><div class="daycell"><div class="dnum"><span class="n">13</span><span class="w">二</span></div><div class="elist"><div class="ev hayley "><div class="t">17:00–18:00</div><div class="ttl">Hayley — GFA FUNdamentals Gym (Leederville)</div><div class="loc">Leederville GFA</div></div></div></div><div class="daycell"><div class="dnum"><span class="n">14</span><span class="w">三</span></div><div class="elist"><div class="ev henry "><div class="t">17:30–18:30</div><div class="ttl">Henry piano lesson with Jun</div><div class="loc">Start date pending Jun's confirmation.</div></div></div></div><div class="daycell"><div class="dnum"><span class="n">15</span><span class="w">四</span></div><div class="elist"><div class="ev henry "><div class="t">14:00–15:45</div><div class="ttl">Bee</div></div><div class="ev school "><div class="t">16:30–17:00</div><div class="ttl">State Swim</div></div></div></div><div class="daycell tight"><div class="dnum"><span class="n">16</span><span class="w">五</span></div><div class="gap">⚠ Kiss and Drive 16:00 完 → UPlus 16:00 即開，無空檔</div><div class="elist"><div class="ev school "><div class="t">15:00–16:00</div><div class="ttl">Kiss and Drive</div></div><div class="ev henry "><div class="t">16:00–17:30</div><div class="ttl">Henry — UPlus English + Maths</div></div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">17</span><span class="w">六</span></div><div class="elist"><div class="ev possible "><div class="t">16:00–17:30</div><div class="ttl">Henry — Badminton (Apex) [possible]</div></div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">18</span><span class="w">日</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div></div><div class="week"><div class="daycell"><div class="dnum"><span class="n">19</span><span class="w">一</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">20</span><span class="w">二</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">21</span><span class="w">三</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">22</span><span class="w">四</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">23</span><span class="w">五</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">24</span><span class="w">六</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">25</span><span class="w">日</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div></div><div class="week"><div class="daycell"><div class="dnum"><span class="n">26</span><span class="w">一</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">27</span><span class="w">二</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">28</span><span class="w">三</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">29</span><span class="w">四</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell"><div class="dnum"><span class="n">30</span><span class="w">五</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell wkend"><div class="dnum"><span class="n">31</span><span class="w">六</span></div><div class="elist"><div class="quiet">（視窗外）</div></div></div><div class="daycell out"><div class="dnum"><span class="n">1</span><span class="w">日</span></div><div class="elist"></div></div></div></div></section>
+<section class="detail"><h2>詳細清單 · 3–17 Oct</h2><h3>Sat 3 Oct（星期六）</h3><ul><li><strong>10:00–17:00</strong> — Perth Royal Show (tickets bought) · Claremont Showground, Perth</li><li><strong>10:00–11:00</strong> — Yellow Brick Road 2026 · Claremont Showground</li></ul><h3>Sun 4 Oct（星期日）</h3><ul><li>quiet</li></ul><h3>Mon 5 Oct（星期一）</h3><ul><li>quiet</li></ul><h3>Tue 6 Oct（星期二）</h3><ul><li><strong>08:30–09:00</strong> — TODO: cancel Regent OSHC for Bee Mondays (12 Oct–7 Dec)</li><li><strong>14:00–15:45</strong> — Bee</li><li><strong>14:40–16:10</strong> — Henry — Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>17:00–18:00</strong> — GYM/Hayley</li></ul><h3>Wed 7 Oct（星期三）</h3><ul><li><strong>12:30–13:15</strong> — Piano trial + interview – The Pianist Music Academy (Sophia) · The Pianist Music Academy, 1b/9 Yampi Way, Willetton WA</li><li><strong>14:40–16:10</strong> — Henry — Learning Bee NAPLAN English Workshop · The Learning Bee</li></ul><h3>Thu 8 Oct（星期四）</h3><ul><li><strong>14:40–16:10</strong> — Henry — Learning Bee NAPLAN English Workshop · The Learning Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 9 Oct（星期五）</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>15:00–16:00</strong> — Kiss and Drive</li></ul><h3>Sat 10 Oct（星期六）</h3><ul><li>quiet</li></ul><h3>Sun 11 Oct（星期日）</h3><ul><li>quiet</li></ul><h3>Mon 12 Oct（星期一）</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>16:10–17:10</strong> — Henry — Learning Bee NAPLAN Prep Writing · The Learning Bee</li></ul><h3>Tue 13 Oct（星期二）</h3><ul><li><strong>17:00–18:00</strong> — Hayley — GFA FUNdamentals Gym (Leederville) · Leederville GFA</li></ul><h3>Wed 14 Oct（星期三）</h3><ul><li><strong>17:30–18:30</strong> — Henry piano lesson with Jun · Start date pending Jun's confirmation.</li></ul><h3>Thu 15 Oct（星期四）</h3><ul><li><strong>14:00–15:45</strong> — Bee</li><li><strong>16:30–17:00</strong> — State Swim</li></ul><h3>Fri 16 Oct（星期五）</h3><ul><li><strong>15:00–16:00</strong> — Kiss and Drive</li><li><strong>16:00–17:30</strong> — Henry — UPlus English + Maths</li></ul><h3>Sat 17 Oct（星期六）</h3><ul><li><strong>16:00–17:30</strong> — Henry — Badminton (Apex) [possible]</li></ul></section>
+<footer>Wong Family · Australia/Perth · Print-friendly · rebuilt 3 Oct 2026 ~8:10 am PT</footer>
+</div>
 </div>
 <script>
 
